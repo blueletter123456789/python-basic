@@ -1,3 +1,4 @@
+import logging
 import logging.config
 
 from my_logging import my_logger
@@ -18,16 +19,19 @@ def main():
     # logging.debug('debug')
     # logging.info('info %s %s' % ('test', 'test2'))
 
+
     # formatter = '%(levelname)s: %(asctime)s %(message)s'
     # logging.basicConfig(level=logging.INFO, format=formatter)
     #
     # logging.info('info %s %s' % ('test', 'test2'))
+
 
     # logging.basicConfig(level=logging.INFO)
     # logger = logging.getLogger(__name__)
     # logger.setLevel(logging.DEBUG)
     # logger.debug('debug')
     # logging.debug('logging debug')
+
 
     # logging.basicConfig(level=logging.INFO)
     # logger = logging.getLogger(__name__)
@@ -38,39 +42,50 @@ def main():
     #
     # my_logger.main()
 
+
     # logging.config.fileConfig('my_logging/logging.ini')
-    logging.config.dictConfig({
-        'version': 1,
-        'formatters': {
-            'sampleFormatter': {
-                'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
-            }
-        },
-        'handlers': {
-            'sampleHandlers': {
-                'class': 'logging.StreamHandler',
-                'formatter': 'sampleFormatter',
-                'level': logging.DEBUG
-            }
-        },
-        'root': {
-            'handlers': ['sampleHandlers'],
-            'level': logging.WARNING
-        },
-        'loggers': {
-            'simpleExample': {
-                'handlers': ['sampleHandlers'],
-                'level': logging.DEBUG,
-                'propagate': 0
-            }
-        }
+    # logging.config.dictConfig({
+    #     'version': 1,
+    #     'formatters': {
+    #         'sampleFormatter': {
+    #             'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+    #         }
+    #     },
+    #     'handlers': {
+    #         'sampleHandlers': {
+    #             'class': 'logging.StreamHandler',
+    #             'formatter': 'sampleFormatter',
+    #             'level': logging.DEBUG
+    #         }
+    #     },
+    #     'root': {
+    #         'handlers': ['sampleHandlers'],
+    #         'level': logging.WARNING
+    #     },
+    #     'loggers': {
+    #         'simpleExample': {
+    #             'handlers': ['sampleHandlers'],
+    #             'level': logging.DEBUG,
+    #             'propagate': 0
+    #         }
+    #     }
+    # })
+    #
+    # # logger = logging.getLogger(__name__)
+    # logger = logging.getLogger('simpleExample')
+    #
+    # logger.debug('debug message')
+    # logger.info('info message')
+    # logger.warning('warning message')
+    # logger.error('error message')
+    # logger.critical('critical message')
+
+
+    logger = logging.getLogger(__name__)
+
+    logger.error('Api call is failed')
+    logger.error({
+        'action': 'create',
+        'status': 'fail',
+        'message': 'api call is failed'
     })
-
-    # logger = logging.getLogger(__name__)
-    logger = logging.getLogger('simpleExample')
-
-    logger.debug('debug message')
-    logger.info('info message')
-    logger.warning('warning message')
-    logger.error('error message')
-    logger.critical('critical message')
