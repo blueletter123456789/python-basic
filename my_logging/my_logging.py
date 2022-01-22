@@ -10,7 +10,13 @@ def main():
     # logging.debug('debug')
     # logging.info('info %s %s' % ('test', 'test2'))
 
-    formatter = '%(levelname)s: %(asctime)s %(message)s'
-    logging.basicConfig(level=logging.INFO, format=formatter)
+    # formatter = '%(levelname)s: %(asctime)s %(message)s'
+    # logging.basicConfig(level=logging.INFO, format=formatter)
+    #
+    # logging.info('info %s %s' % ('test', 'test2'))
 
-    logging.info('info %s %s' % ('test', 'test2'))
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logger.debug('debug')
+    logging.debug('logging debug')
