@@ -1,5 +1,7 @@
 import logging
 
+from my_logging import my_logger
+
 
 def main():
     # logging.basicConfig(filename='log/test.log', level=logging.DEBUG)
@@ -15,8 +17,14 @@ def main():
     #
     # logging.info('info %s %s' % ('test', 'test2'))
 
+    # logging.basicConfig(level=logging.INFO)
+    # logger = logging.getLogger(__name__)
+    # logger.setLevel(logging.DEBUG)
+    # logger.debug('debug')
+    # logging.debug('logging debug')
+
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    logger.debug('debug')
-    logging.debug('logging debug')
+    logger.info('from main')
+
+    my_logger.main()
