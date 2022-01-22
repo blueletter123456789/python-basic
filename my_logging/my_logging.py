@@ -3,6 +3,12 @@ import logging
 from my_logging import my_logger
 
 
+class NoPassFilter(logging.Filter):
+    def filter(self, record):
+        log_message = record.getMessage()
+        return 'password' not in log_message
+
+
 def main():
     # logging.basicConfig(filename='log/test.log', level=logging.DEBUG)
     # logging.critical('critical')
@@ -25,6 +31,9 @@ def main():
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
+    logger.addFilter(NoPassFilter())
+
     logger.info('from main')
+    logger.info('from main password = test1')
 
     my_logger.main()
