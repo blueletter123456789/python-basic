@@ -1,4 +1,4 @@
-import logging
+import logging.config
 
 from my_logging import my_logger
 
@@ -29,11 +29,48 @@ def main():
     # logger.debug('debug')
     # logging.debug('logging debug')
 
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__)
-    logger.addFilter(NoPassFilter())
+    # logging.basicConfig(level=logging.INFO)
+    # logger = logging.getLogger(__name__)
+    # logger.addFilter(NoPassFilter())
+    #
+    # logger.info('from main')
+    # logger.info('from main password = test1')
+    #
+    # my_logger.main()
 
-    logger.info('from main')
-    logger.info('from main password = test1')
+    # logging.config.fileConfig('my_logging/logging.ini')
+    logging.config.dictConfig({
+        'version': 1,
+        'formatters': {
+            'sampleFormatter': {
+                'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+            }
+        },
+        'handlers': {
+            'sampleHandlers': {
+                'class': 'logging.StreamHandler',
+                'formatter': 'sampleFormatter',
+                'level': logging.DEBUG
+            }
+        },
+        'root': {
+            'handlers': ['sampleHandlers'],
+            'level': logging.WARNING
+        },
+        'loggers': {
+            'simpleExample': {
+                'handlers': ['sampleHandlers'],
+                'level': logging.DEBUG,
+                'propagate': 0
+            }
+        }
+    })
 
-    my_logger.main()
+    # logger = logging.getLogger(__name__)
+    logger = logging.getLogger('simpleExample')
+
+    logger.debug('debug message')
+    logger.info('info message')
+    logger.warning('warning message')
+    logger.error('error message')
+    logger.critical('critical message')
