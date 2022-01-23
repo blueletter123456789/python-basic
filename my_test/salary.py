@@ -14,5 +14,7 @@ class Salary(object):
         self.year = year
 
     def calculation_salary(self):
-        bonus = self.bonus_api.bonus_price()
+        bonus = 0
+        if self.year < 2022:
+            bonus = self.bonus_api.bonus_price(year=self.year)
         return self.base + bonus
